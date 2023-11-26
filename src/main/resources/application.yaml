@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jbc:h2:mem:testdb
+    usarname: root
+    password: toor
+    driverClassName: org.h2.Driver
+  jpa:
+    database: h2
+    database-platform: org.hibernate.dialect.h2Dialect
+  h2:
+    console:
+      enable: true
