@@ -7,3 +7,5 @@ p
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 t
 Dsrc/test/java/br/com/fiap/api/repository/MensagemRepositoryTest.java,b\4\b4d7d2b733db4f806d6856a4ac4614fea4f7ba1d
+S
+#src/main/resources/application.yaml,8\b\8bf9a0c76cee89021a19081a2d70237db7e2fd8a

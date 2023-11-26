@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -33,11 +34,8 @@ public class MensagemRepositoryTest {
     @Test
     void devePermitirRegistrarMensagem(){
         //Arrange
-        var mensagem = Mensagem.builder()
-                .id(UUID.randomUUID())
-                .usuario("Luzivan")
-                .conteudo("Mensagem do Luzivan")
-                .build();
+        var id = UUID.randomUUID();
+        var mensagem = gerarMensagem();
 
         when(mensagemRepository.save(any(Mensagem.class))).thenReturn(mensagem);
 
@@ -53,18 +51,43 @@ public class MensagemRepositoryTest {
     }
 
     @Test
-    void devePermitirBuscarMensagem(){
-        fail("Teste não implementado!");
+    void devePermitirBuscarMensagem() {
+        // Arrange
+        var id = UUID.randomUUID();
+        var mensagem = gerarMensagem();
+        mensagem.setId(id);
+
+        when(mensagemRepository.findById(any(UUID.class)))
+                .thenReturn(Optional.of(mensagem));
+
+        // Act
+        var mensagemRecebidaOpcional = mensagemRepository.findById(id);
+
+        // Assert
+        assertThat(mensagemRecebidaOpcional)
+                .isPresent()
+                .containsSame(mensagem);
+        mensagemRecebidaOpcional.ifPresent(mensagemRecebida ->{
+            assertThat(mensagemRecebida.getId()).isEqualTo(mensagem.getId());
+            assertThat(mensagemRecebida.getConteudo()).isEqualTo(mensagem.getConteudo());
+        });
+        verify(mensagemRepository, times(1)).findById(any(UUID.class));
+
     }
 
-    @Test
-    void devePermitirAlterarMensagem(){
-        fail("Teste não implementado!");
-    }
 
     @Test
     void devePermitirExcluirMensagem(){
-        fail("Teste não implementado!");
+        // Arrange
+        var id = UUID.randomUUID();
+        doNothing().when(mensagemRepository).deleteById(any(UUID.class));
+
+        // Act
+        mensagemRepository.deleteById(id);
+
+        // Assert
+        verify(mensagemRepository, times(1)).deleteById(any(UUID.class));
+
     }
 
     private Mensagem gerarMensagem(){

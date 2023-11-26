@@ -7,3 +7,5 @@ p
 @src/main/java/br/com/fiap/api/repository/MensagemRepository.java,1\6\16d7ed4bbdad31c6ab92738b2e97c0d3d9a0c647
 t
 Dsrc/test/java/br/com/fiap/api/repository/MensagemRepositoryTest.java,b\4\b4d7d2b733db4f806d6856a4ac4614fea4f7ba1d
+S
+#src/main/resources/application.yaml,8\b\8bf9a0c76cee89021a19081a2d70237db7e2fd8a
